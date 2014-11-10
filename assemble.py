@@ -1,12 +1,14 @@
 # Python Code for CS 170
 import sys
+import fileinput
 
 # basic set-up
 max_result = -1
-arguments = list(sys.argv)
-file_name = arguments[1]
-sequences = open(file_name, "r")
-content = sequences.readlines()
+content = []
+for line in fileinput.input():
+    line = line.strip()
+    content.append(line)
+
 
 class Matches:
 	def __init__(self, first, second, value):
@@ -46,9 +48,9 @@ def substringfinder2(X, Y):
 	if (X == Y):
 		return farthest_check
 	if (X.find(Y) > -1):
-		return len(X)
-	elif (Y.find(X) > -1):
 		return len(Y)
+	elif (Y.find(X) > -1):
+		return len(X)
 	longest_substring = 0
 	result = 1
 	while (result <= farthest_check):
@@ -116,10 +118,3 @@ while (combined is not None):
 	combined = combinator(content)
 
 print content[0]
-
-# first = "GGGTCATCTGCCTACCGATTT"
-# second = "GGGTCATCTGCCTACCGATTTTATGAGAAAGTCCTTTGCA"
-# print substringfinder3(first, second)
-# print substring_edge(second, first, 21)
-# print len(second)
-# print substringfinder2(first, second)
